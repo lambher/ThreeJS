@@ -5,12 +5,12 @@ export default class Game {
     constructor(document) {
         this.document = document;
         this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        this.camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.document.body.appendChild(this.renderer.domElement);
         this.keyEvent = new KeyEvent(this.document);
-        this.player = new Player(new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 0, 1))
+        this.player = new Player(new THREE.Vector3(0, 0, 0))
     }
 
     initScene() {

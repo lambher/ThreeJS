@@ -1,10 +1,11 @@
 export default class Player {
-    constructor(position, direction) {
+    constructor(position) {
         this.position = position;
-        this.direction = direction;
+        this.direction = new THREE.Vector3(0, 0, 1);
         this.velocity = new THREE.Vector3(0, 0, 0);
         this.upAxis = new THREE.Vector3(0, 1, 0);
         this.upAngle = 0;
+        this.angle = 0;
     }
 
     update(keyEvent) {
@@ -34,7 +35,12 @@ export default class Player {
             this.turnLeft();
         }
 
-        this.position.add(this.velocity);
+
+
+        this.angle += this.upAngle;
+        this.direction.applyAxisAngle(this.upAxis, this.upAngle);
+
+        this.position.add(this.velocity.clone().applyAxisAngle(this.upAxis, this.angle));
 
 
         this.velocity.multiplyScalar(0.95);
@@ -48,7 +54,6 @@ export default class Player {
     forward() {
         this.velocity.z = -0.02;
     }
-
 
     backward() {
         this.velocity.z = 0.02;
